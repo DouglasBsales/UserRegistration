@@ -22,8 +22,6 @@ function usuariosCadastrados() {
 
   buttonUsuarioCadastrado.classList.add("corAzul");
   buttonCadastroUser.classList.remove("corAzul");
-
-  console.log(listaUsuarios);
 }
 
 const listaUsuarios = []; // ARRAY OBTENDO OS VALORES DOS OBJETOS ADICIONADOS
@@ -40,6 +38,11 @@ function adicionarUsuario() {
 
   if (campoNome === "" || campoNick === "" || campoEmail === "") {
     alert("Por favor, preencha todos os campos");
+    return;
+  }
+
+  const emailValido = verificarEmail();
+  if (!emailValido) {
     return;
   }
 
@@ -97,10 +100,12 @@ function verificarEmail() {
   if (regexEmail.test(campoEmail)) {
     iconCheck.classList.remove("displayNone");
     campoEmailDiv.classList.remove("bordaRed");
+    return true;
   } else {
+    alert("Escreva um email válido");
     iconCheck.classList.add("displayNone");
-    alert("Por favor, escreva um email válido");
     campoEmailDiv.classList.add("bordaRed");
+    return false;
   }
 }
 
