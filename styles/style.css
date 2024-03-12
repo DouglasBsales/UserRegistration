@@ -4,10 +4,14 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-.displayNone{
-    display: none;
+.displayNone {
+  display: none;
 }
 
-.corAzul{
-    color: #1877F2;
+.corAzul {
+  color: #1877f2;
+}
+
+.bordaRed {
+  border-bottom: 2px solid red;
 }

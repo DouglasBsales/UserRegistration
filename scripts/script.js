@@ -26,13 +26,17 @@ function usuariosCadastrados() {
   console.log(listaUsuarios);
 }
 
-const listaUsuarios = [];
+const listaUsuarios = []; // ARRAY OBTENDO OS VALORES DOS OBJETOS ADICIONADOS
 
 function adicionarUsuario() {
   const campoNome = document.getElementById("campoNome").value;
   const campoNick = document.getElementById("campoNick").value;
   const campoEmail = document.getElementById("campoEmail").value;
   const divListaUsuarios = document.getElementById("listaUsuarios");
+
+  let campoNomeDiv = document.getElementById("campoNomeDiv");
+  let campoNickDiv = document.getElementById("campoNickDiv");
+  let campoEmailDiv = document.getElementById("campoEmailDiv");
 
   if (campoNome === "" || campoNick === "" || campoEmail === "") {
     alert("Por favor, preencha todos os campos");
@@ -42,8 +46,8 @@ function adicionarUsuario() {
   // Verifica se algum usuário já possui os mesmos valores
   const usuarioExistente = listaUsuarios.find(
     (usuario) =>
-      usuario.Nome === campoNome &&
-      usuario.Nickname === campoNick &&
+      usuario.Nome === campoNome ||
+      usuario.Nickname === campoNick ||
       usuario.Email === campoEmail
   );
 
@@ -70,16 +74,37 @@ function adicionarUsuario() {
     `;
 
     divListaUsuarios.appendChild(usuarioElemento);
-
     alert("Usuário adicionado com sucesso");
+    campoNomeDiv.classList.remove("bordaRed");
+    campoNickDiv.classList.remove("bordaRed");
+    campoEmailDiv.classList.remove("bordaRed");
   } else {
-    alert("O usuário já está adicionado");
+    alert("Já existe um usuário cadastrado com essas informações");
+    campoNomeDiv.classList.add("bordaRed");
+    campoNickDiv.classList.add("bordaRed");
+    campoEmailDiv.classList.add("bordaRed");
   }
 
-  document.getElementById("campoNome").value = "";
-  document.getElementById("campoNick").value = "";
-  document.getElementById("campoEmail").value = "";
+  clearContentCampos();
 }
+
+function verificarEmail() {
+  const iconCheck = document.getElementById("iconCheck");
+  const campoEmail = document.getElementById("campoEmail").value;
+  let campoEmailDiv = document.getElementById("campoEmailDiv");
+
+  const regexEmail = /\.com$/;
+  if (regexEmail.test(campoEmail)) {
+    iconCheck.classList.remove("displayNone");
+    campoEmailDiv.classList.remove("bordaRed");
+  } else {
+    iconCheck.classList.add("displayNone");
+    alert("Por favor, escreva um email válido");
+    campoEmailDiv.classList.add("bordaRed");
+  }
+}
+
+document.getElementById("campoEmail").addEventListener("blur", verificarEmail);
 
 function removerUsuario(nome, nickname, email) {
   const index = listaUsuarios.findIndex(
@@ -118,4 +143,12 @@ function exibirUsuarios() {
 
     divListaUsuarios.appendChild(usuarioElemento);
   });
+}
+
+function clearContentCampos() {
+  const iconCheck = document.getElementById("iconCheck");
+  document.getElementById("campoNome").value = "";
+  document.getElementById("campoNick").value = "";
+  document.getElementById("campoEmail").value = "";
+  iconCheck.classList.add("displayNone");
 }
