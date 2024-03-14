@@ -67,11 +67,16 @@ function adicionarUsuario() {
 
     usuarioElemento.style.paddingTop = "10px";
     usuarioElemento.innerHTML = `
+      <div class="flex gap-[80px] justify-between">
+      <div>
       <p>Nome: ${infoUsuarios.Nome}</p>
       <p>Nickname: ${infoUsuarios.Nickname}</p>
       <p>Email: ${infoUsuarios.Email}</p>
-      <button class= "cursor: pointer"onclick="removerUsuario('${infoUsuarios.Nome}', '${infoUsuarios.Nickname}', '${infoUsuarios.Email}')"> <strong> Remover Usuário <strong> </button>
-      <br/>
+      </div>
+      <div>
+      <button class= "cursor: pointer"onclick="removerUsuario('${infoUsuarios.Nome}', '${infoUsuarios.Nickname}', '${infoUsuarios.Email}')"><i class="bi bi-trash text-[#8D8D8D]" style="font-size: 30px"></i> </button>
+      </div>
+      </div>
       <br/>
       <hr/>
     `;
@@ -137,13 +142,18 @@ function exibirUsuarios() {
     const usuarioElemento = document.createElement("div");
 
     usuarioElemento.innerHTML = `
-    <p>Nome:${usuario.Nome}</p>
-    <p>Nickname: ${usuario.Nickname}</p>
-    <p>Email: ${usuario.Email}</p>
-    <button class= "cursor: pointer"onclick="removerUsuario('${usuario.Nome}', '${usuario.Nickname}', '${usuario.Email}')"> <strong> Remover Usuário <strong> </button>
-    <br/>
-    <br/>
-    <hr/>
+    <div class="flex gap-[80px] justify-between">
+      <div>
+      <p>Nome: ${usuario.Nome}</p>
+      <p>Nickname: ${usuario.Nickname}</p>
+      <p>Email: ${usuario.Email}</p>
+      </div>
+      <div>
+      <button class= "cursor: pointer"onclick="removerUsuario('${usuario.Nome}', '${usuario.Nickname}', '${usuario.Email}')"><i class="bi bi-trash text-[#8D8D8D]" style="font-size: 30px"></i> </button>
+      </div>
+      </div>
+      <br/>
+      <hr/>
     `;
 
     divListaUsuarios.appendChild(usuarioElemento);
